@@ -1,0 +1,10 @@
+<div class="d-flex flex-column w-100">
+    <h1>Login</h1> 
+    <form class="d-flex flex-column w-100" [formGroup]="logForm" (submit)="tryLogin()">
+        <p>Login</p>
+        <input type="text" id="login" formControlName="login"  class="w-auto mb-3" name="login" placeholder="Login">
+        <p>Password</p>
+        <input type="password" id="password" formControlName="password" class="w-auto mb-3" name="password" placeholder="Password">
+        <button type="button" class="btn btn-success w-50 align-self-center" (click)="tryLogin()">Success</button>
+    </form>
+</div>

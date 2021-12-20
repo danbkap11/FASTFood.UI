@@ -1,0 +1,34 @@
+<div class="d-flex flex-column w-100">
+    <button *ngIf="!selectedFood" type="button" class="btn btn-warning w-50 align-self-center mb-3" (click)="selectFood(foodArea)">Select Food</button>
+    <div *ngIf="selectedFood" class="d-flex flex-column w-100">
+        <form class="d-flex flex-column w-100" [formGroup]="regForm">
+            <p class="mr-3">{{'Food: '+ selectedFood.name}}</p>
+            <p class="mr-3">{{selectedFood.description}}</p>
+            <p class="mr-3">{{'Temp: '+ selectedFood.temp}}</p>
+            <button type="button" class="btn btn-warning w-50 align-self-center mb-3" (click)="selectFood(foodArea)">Change Food</button>
+            <p class="mb-3">{{selectedFood.isPacked?'Set quantity' : 'Set weight'}}</p>
+            <input type="number" formControlName="quantity" class="mb-3 w-50 align-self-center" placeholder="0.00">
+            <p class="mb-3">Set price</p>
+            <input type="number" formControlName="price" class="mb-3 w-50 align-self-center" placeholder="0.00">
+            <p class="mb-3">Set shelfLife</p>
+            <input type="date" formControlName="shelfLife" class="mb-3 w-50 align-self-center" placeholder="21/01/2021">
+        </form>
+        <button *ngIf="!foodInStorage.id" type="button" class="btn btn-success w-50 align-self-center" (click)="putFood()">Put food</button>
+        <button *ngIf="foodInStorage.id" type="button" class="btn btn-success w-50 align-self-center" (click)="updateFoodInStorage()">Update food</button>
+    </div>
+</div>
+
+
+<ng-template #foodArea let-modal>
+    <div class="modal-header">
+        <h3 class="align-self-center m-0">Food</h3> 
+      <button type="button" class="close" id="closeFoodArea" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-food
+      [temp]="temp">
+      </app-food>
+    </div>
+</ng-template>

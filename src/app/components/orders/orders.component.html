@@ -1,0 +1,110 @@
+<mat-tab-group>
+    <mat-tab label="Sent request"> 
+        <div *ngIf="!orderSentRequest || orderSentRequest.length === 0" class="align-self-center pt-2">
+            <h3 class="align-self-center">No sentet orders</h3>
+        </div>
+        <div *ngIf="orderSentRequest && orderSentRequest.length > 0" class="d-flex flex-column w-100 pt-2">
+            <button type="button" class="btn btn-danger w-50 align-self-center mb-3" (click)="cancelOrders(-1)">Cancel All</button>
+            <div *ngFor="let order of orderSentRequest" class="d-flex flex-column w-100">
+                <div [ngClass]="['shop-case', order.status, 'w-70', 'align-self-center', 'mb-3', 'd-flex', 'flex-column', 'pt-2', 'npCursor']" >
+                    <div class=" w-70 align-self-center mb-1 d-flex flex-row">
+                        <p class="mr-2">OrderId: {{order.id}}</p>
+                        <p class="mr-2">{{order.foodName}}</p>
+                        <p class="mr-2">Quantity: {{order.quantity}}</p>
+                    </div>
+                    <div class=" w-70 align-self-center mb-1 d-flex flex-row">
+                        <p class="mr-2">Price: {{order.price}}</p>
+                        <p class="mr-2">Provider: {{order.providerName}}</p>
+                        <p class="mr-2">Status: {{order.status}}</p>            
+                    </div>
+                    <button *ngIf="storeRole === 4" type="button" class="btn btn-success w-30 align-self-center mb-3" (click)="acceptOrders(order, selectFoodArea)">Accept</button>
+                    <button type="button" class="btn btn-danger w-30 align-self-center mb-3" (click)="cancelOrders(order.id)">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="In progress"> 
+        <div *ngIf="orderInProgress && orderInProgress.length > 0" class="d-flex flex-column w-100 pt-2">
+            <div   *ngFor="let order of orderInProgress" class="d-flex flex-column w-100">
+                <div [ngClass]="['shop-case', order.status, 'w-70', 'align-self-center', 'mb-3', 'd-flex', 'flex-column', 'pt-2', 'npCursor']" >
+                    <div class=" w-70 align-self-center mb-1 d-flex flex-row">
+                        <p class="mr-2">Id: {{order.id}}</p>
+                        <p class="mr-2">{{order.foodName}}</p>
+                        <p class="mr-2">Quantity: {{order.quantity}}</p>
+                        <p class="mr-2">shelfLife: {{order.shelfLife}}</p>
+                    </div>
+                    <div class=" w-70 align-self-center mb-1 d-flex flex-row">
+                        <p class="mr-2">Price: {{order.price}}</p>
+                        <p class="mr-2">Provider: {{order.providerName}}</p>
+                        <p class="mr-2">Status: {{order.status}}</p>            
+                    </div>
+                    <div *ngIf="storeRole === 3" class="d-flex align-self-center">
+                        <button  type="button" class="btn btn-success mb-3" (click)="toFinish(order.id)">Finish Order</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!orderInProgress || orderInProgress.length == 0" class="align-self-center pt-2">
+            <h3 class="align-self-center">No orders in progress</h3>
+        </div>
+    </mat-tab>
+    <mat-tab label="Finished">
+        <div *ngIf="!orderFinished || orderFinished.length == 0" class="align-self-center pt-2">
+            <h3 class="align-self-center">No Finished Orders</h3>
+        </div>
+        <div *ngIf="orderFinished && orderFinished.length > 0" class="d-flex flex-column w-100 pt-2">
+            <div  *ngFor="let order of orderFinished" class="d-flex flex-column w-100">
+                <div [ngClass]="['shop-case', order.status, 'w-70', 'align-self-center', 'mb-3', 'd-flex', 'flex-column', 'pt-2', 'npCursor']" >
+                    <div class=" w-70 align-self-center mb-1 d-flex flex-row">
+                        <p class="mr-2">Id: {{order.id}}</p>
+                        <p class="mr-2">{{order.foodName}}</p>
+                        <p class="mr-2">Quantity: {{order.quantity}}</p>
+                        <p class="mr-2">shelfLife: {{order.shelfLife}}</p>
+                    </div>
+                    <div class=" w-70 align-self-center mb-1 d-flex flex-row">
+                        <p class="mr-2">Price: {{order.price}}</p>
+                        <p class="mr-2">Provider: {{order.providerName}}</p>
+                        <p class="mr-2">Status: {{order.status}}</p>            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Canceled">
+        <div *ngIf="!orderCanceled || orderCanceled.length == 0" class="align-self-center pt-2">
+            <h3 class="align-self-center">No Canceled Orders</h3>
+        </div>
+        <div *ngIf="orderCanceled && orderCanceled.length > 0" class="d-flex flex-column w-100 pt-2">
+            <div  *ngFor="let order of orderCanceled" class="d-flex flex-column w-100">
+                <div [ngClass]="['shop-case', order.status, 'w-70', 'align-self-center', 'mb-3', 'd-flex', 'flex-column', 'pt-2', 'npCursor']" >
+                    <div class=" w-70 align-self-center mb-1 d-flex flex-row">
+                        <p class="mr-2">Id: {{order.id}}</p>
+                        <p class="mr-2">{{order.foodName}}</p>
+                        <p class="mr-2">Quantity: {{order.quantity}}</p>
+                    </div>
+                    <div class=" w-70 align-self-center mb-1 d-flex flex-row">
+                        <p class="mr-2">Price: {{order.price}}</p>
+                        <p class="mr-2">Provider: {{order.providerName}}</p>
+                        <p class="mr-2">Status: {{order.status}}</p>            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+  </mat-tab-group>
+
+  <ng-template #selectFoodArea let-modal>
+    <div class="modal-header">
+        <h3 class="align-self-center m-0">Select Food</h3> 
+      <button type="button" class="close" id="closeSelectFoodArea" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <app-set-food-in-storage
+        [storageList]="storageList"
+        [order]="selectedOrder">
+        </app-set-food-in-storage>
+    </div>
+</ng-template>

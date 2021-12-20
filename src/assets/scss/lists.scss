@@ -1,0 +1,23 @@
+.shop-case{
+  border: 1px solid #DAA520;
+  border-radius: 8px;
+  &:hover {
+      cursor: pointer;
+      border-width: 3px;
+    }
+}
+.READY,.green, .ACCEPTED, .FINISHED {
+  border-color: green;
+}
+.INPROGRESS, .lightgreen{
+  border-color: lightgreen;
+}
+.EMPTY, .blue {
+  border-color: blue;
+}
+.SENT_REQUEST, .orange {
+  border-color: orange;
+}
+.ERROR, .red, .REJECTED, .CANCELED {
+  border-color: red;
+}

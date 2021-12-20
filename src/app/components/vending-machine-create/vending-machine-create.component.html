@@ -1,0 +1,10 @@
+<div class="d-flex flex-column w-100">
+    <form class="d-flex flex-column w-100" [formGroup]="regForm">
+        <p>Name</p>
+        <input type="text" formControlName="name"  class="w-auto mb-3" placeholder="Name">
+        <p>Location</p>
+        <input type="text" formControlName="location"  class="w-auto mb-3" placeholder="Location">
+        <button *ngIf="!shop.id" type="button" class="btn btn-success w-50 align-self-center" (click)="createMachine()">{{'Create ' + role}}</button>
+        <button *ngIf="shop.id" type="button" class="btn btn-success w-50 align-self-center" (click)="updateMachine()">{{'Update '+ role}}</button>
+    </form>
+</div>

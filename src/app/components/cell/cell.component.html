@@ -1,0 +1,53 @@
+<div class="d-flex flex-column w-100">
+    <form class="d-flex flex-column w-100" [formGroup]="cellForm">
+      <button *ngIf="!selectedFood" type="button" class="btn btn-warning w-50 align-self-center mb-3" (click)="selectFood(foodArea)">Select Food</button>
+      <div *ngIf="selectedFood" class="d-flex flex-column align-self-center w-100">
+        <p class="mr-3">{{'Food: '+ selectedFood.name}}</p>
+        <p class="mr-3">{{selectedFood.description}}</p>
+        <p class="mr-3">{{'Temp: '+ selectedFood.temp}}</p>
+        <button type="button" class="btn btn-warning w-50 align-self-center mb-3" (click)="selectFood(foodArea)">Change Food</button>
+        <div *ngIf="!selectedFood.isPacked" class="d-flex flex-column align-self-center w-100"> 
+          <p class="mb-3">Set weight</p>
+          <input type="number" formControlName="weight" class="mb-3 w-50 align-self-center" placeholder="0.00">
+        </div>
+        <p class="mb-3">Set price</p>
+        <input type="number" formControlName="price" class="mb-3 w-50 align-self-center" placeholder="0.00">
+        <button *ngIf="!provider || !provider.id"type="button" class="btn btn-warning w-50 align-self-center" (click)="selectProvider(providerArea)">Select Provider</button>
+        <div *ngIf="provider && provider.id" class="d-flex flex-column align-self-center w-100">
+          <p class="align-self-center mb-3">{{'Provider: '+ provider.name}}</p>
+          <p class="align-self-center mb-3">{{'Location: ' + provider.location}}</p>
+          <p *ngIf="provider.userId !== sharedService.user.id" class="align-self-center mb-3">{{'Price: for 1' + selectedFood.isPacked ? ' ' : 'kg ' + provider.price}}</p>   
+          <button type="button" class="btn btn-warning w-50 align-self-center mb-3" (click)="selectProvider(providerArea)">Change Provider</button> 
+          <button type="button" class="btn btn-success w-70 align-self-center" (click)="updateCell()">Save</button>      
+        </div>
+      </div>
+      <button *ngIf="selectedFood && provider"type="button" class="btn btn-primary w-70 align-self-center bt-lgo mt-2 pt-2" (click)="clearCell()">Cleare Cell</button>  
+    </form>
+</div>
+
+<ng-template #foodArea let-modal>
+    <div class="modal-header">
+        <h3 class="align-self-center m-0">Food</h3> 
+      <button type="button" class="close" id="closeFoodArea" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-food>
+      </app-food>
+    </div>
+</ng-template>
+
+<ng-template #providerArea let-modal>
+  <div class="modal-header">
+      <h3 class="align-self-center m-0">Providers</h3> 
+    <button type="button" class="close" id="closeProviderArea" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-providers-of-food
+    [selectedFood]="selectedFood">
+    </app-providers-of-food>
+  </div>
+</ng-template>

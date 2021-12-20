@@ -1,0 +1,31 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="sharedService.activePage" class="nav-tabs pt-2 pl-3 qq">
+    <li *ngIf="!sharedService.isLogin" [ngbNavItem]="'Login'" [routerLink]="['/login']">
+        <a ngbNavLink>Login</a>
+    </li>
+    <li *ngIf="!sharedService.isLogin" [ngbNavItem]="'Registration'" [routerLink]="['/registration']">
+        <a ngbNavLink>Registration</a>
+    </li>
+    <li *ngIf="sharedService.isLogin && !sharedService.isAdmin" [ngbNavItem]="'Home'" [routerLink]="['/home']">
+        <a ngbNavLink>Home</a>
+    </li>
+    <li *ngIf="sharedService.isLogin && !sharedService.isAdmin" [ngbNavItem]="'Warehouses'" [routerLink]="['/warehouses']">
+        <a ngbNavLink>Warehouses</a>
+    </li>
+    <li *ngIf="sharedService.isLogin && !sharedService.isAdmin" [ngbNavItem]="'Shops'" [routerLink]="['/shops']">
+        <a ngbNavLink>Shops</a>
+    </li>
+    <li *ngIf="sharedService.isLogin && !sharedService.isAdmin" [ngbNavItem]="'VendingMachines'" [routerLink]="['/vending-machines']">
+        <a ngbNavLink>VendingMachines</a>
+    </li>
+    <li *ngIf="sharedService.isLogin && sharedService.isAdmin" [ngbNavItem]="'Food'" [routerLink]="['/food']">
+        <a ngbNavLink>Food</a>
+    </li>
+    <li *ngIf="sharedService.isAdmin" [ngbNavItem]="'Admin'" [routerLink]="['/admin']">
+        <a ngbNavLink>Admin</a>
+    </li>
+    <li *ngIf="sharedService.isLogin" [ngbNavItem]="">
+        <a ngbNavLink (click)="logout()">Logout</a>
+    </li>
+</ul>
+  
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

@@ -1,0 +1,43 @@
+<div class="d-flex flex-column w-100">
+    <h1 class="align-self-center mb-5">User Info</h1> 
+    <div class="d-flex flex-row">
+        <form class="d-flex flex-column w-50 mr-5 br-lgo" [formGroup]="updateUserInfoForm" (submit)="updateUserInfo()">
+            <div class="d-flex flex-column align-self-center">
+                <div class="d-flex flex-row">
+                    <p class="clar pr-4 w-50">Login</p>
+                    <p class="">{{userModel?.login}}</p>
+                </div>
+                <div class="d-flex flex-row">
+                    <p class="clar pr-4 w-50">Name</p>
+                    <input type="text" formControlName="name"  class="w-auto mb-3" placeholder="Name">
+                </div>
+                <div class="d-flex flex-row">
+                    <p class="clar pr-4 w-50">Email</p>
+                    <input type="email" formControlName="email" class="w-auto mb-3" placeholder="email">
+                </div>
+                <div class="d-flex flex-row">
+                    <p class="clar pr-4 w-50">Phone</p>
+                    <input type="text" formControlName="phone"  class="w-auto mb-3" placeholder="1111111111">
+                </div>        
+                <button type="button" class="btn btn-success w-50 align-self-center" (click)="updateUserInfo()">Save</button>
+            </div>
+        </form>
+        <form class="d-flex flex-column" [formGroup]="updatePasswordForm" (submit)="updatePassword()">
+            <div class="d-flex flex-column align-self-center">
+                <div class="d-flex flex-row">
+                    <p class="clar pr-4 w-50">Old Password</p>
+                    <input type="password" formControlName="oldPassword"  class="w-auto mb-3" placeholder="Old Password">
+                </div>
+                <div class="d-flex flex-row">
+                    <p class="clar pr-4 w-50">New Password</p>
+                    <input type="password" formControlName="newPassword" class="w-auto mb-3" placeholder="New Password">
+                </div>
+                <div class="d-flex flex-row">
+                    <p class="clar pr-4 w-50">Confirm Password</p>
+                    <input type="password" formControlName="confirmPassword"  class="w-auto mb-3" placeholder="confirmPassword">
+                </div>        
+                <button type="button" class="btn btn-success w-50 align-self-center" (click)="updatePassword()">Update Password</button>
+            </div>
+        </form>
+    </div>
+</div>

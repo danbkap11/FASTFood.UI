@@ -1,0 +1,14 @@
+<div class="d-flex flex-column w-100 mb-4">
+    <h2 class="align-self-center mb-3">Select one by click</h2>
+</div>
+<mat-grid-list  cols="4" rowHeight="2:1" gutterSize="2rem">
+    <div *ngFor="let food of foodList">
+        <mat-grid-tile  class="shop-case ERROR" (click)="selectThis(food)">
+            <div class="w-100 d-flex flex-column">
+                <h3 class="align-self-center">{{food.name}}</h3>
+                <p class="align-self-center">{{'Description: ' + food.description}}</p>
+                <p class="align-self-center">{{'Temp: '+ food.temp}}</p>
+            </div>
+        </mat-grid-tile>
+    </div>            
+</mat-grid-list>

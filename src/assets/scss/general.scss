@@ -1,0 +1,103 @@
+
+@import 'top-bar.scss';
+@import 'lists.scss';
+
+.w-10 {
+    width: 10% !important;
+  }
+  
+  .w-15 {
+    width: 15% !important;
+  }
+  
+  .mw-15 {
+    max-width: 15% !important;
+  }
+  
+  .w-16-6 {
+    width: 16.666%;
+  }
+  
+  .w-20 {
+    width: 20% !important;
+  }
+  
+  .w-25 {
+    width: 25% !important;
+  }
+  
+  .w-30 {
+    width: 30% !important;
+  }
+  
+  .w-35 {
+    width: 35% !important;
+  }
+  
+  .mw-35 {
+    max-width: 35% !important;
+  }
+  
+  .w-40 {
+    width: 40% !important;
+  }
+  
+  .w-45 {
+    width: 40% !important;
+  }
+  
+  .w-50 {
+    width: 50% !important;
+  }
+  
+  .w-60 {
+    width: 60% !important;
+  }
+  
+  .mw-60 {
+    max-width: 60% !important;
+  }
+  
+  .w-70 {
+    width: 70% !important;
+  }
+  
+  .w-80 {
+    width: 80% !important;
+  }
+
+.bb-lgo {
+    border-bottom: 1px solid grey;
+}
+  
+.bt-lgo {
+    border-top: 1px solid grey;
+}
+
+.br-lgo {
+    border-right: 1px solid grey;
+}
+
+.bl-lgo {
+    border-left: 1px solid grey;
+}
+
+.b-lgo {
+    border: 1px solid grey;
+}
+  
+p{
+    align-self: center;
+    .clar{
+        color: grey;
+        font-size: small;
+    }
+}
+
+
+.mat-form-field-flex{
+    background-color: white !important;
+}
+.npCursor {
+    cursor: default;        
+}

@@ -1,0 +1,40 @@
+<div *ngIf="isLoad">
+    <div class="d-flex flex-column w-100 mb-4">
+        <h2 class="align-self-center mb-3">Select one by click</h2>
+    </div>
+    <div class="d-flex flex-column">
+        <h3 class="align-self-center mb-3">Your Providers</h3>
+        <div *ngIf="!yourProviders || yourProviders.length === 0" class="mb-3">
+            <p class="align-self-center">{{'You dont have ' + selectedFood.name + ' to provide'}}</p>
+        </div>
+        <div *ngIf="yourProviders && yourProviders.length !== 0" class="mb-3">
+            <mat-grid-list  cols="3" rowHeight="2:1" gutterSize="2rem">
+                <div *ngFor="let provider of yourProviders">
+                    <mat-grid-tile class="shop-case" (click)="selectThis(provider)">
+                        <div class="w-100 d-flex flex-column">
+                            <h3 class="align-self-center">{{provider.name}}</h3>
+                            <p class="align-self-center">{{'Location: ' + provider.location}}</p>
+                        </div>
+                    </mat-grid-tile>
+                </div>            
+            </mat-grid-list>
+        </div>
+        <h3 class="align-self-center mb-3">Other Providers</h3>
+        <div *ngIf="!otherProviders || otherProviders.length === 0" class="mb-3">
+            <p class="align-self-center">No providers found</p>
+        </div>
+        <div *ngIf="otherProviders && otherProviders.length !== 0" class="mb-3">
+            <mat-grid-list  cols="3" rowHeight="2:1" gutterSize="2rem">
+                <div *ngFor="let provider of otherProviders">
+                    <mat-grid-tile class="shop-case" (click)="selectThis(provider)">
+                        <div class="w-100 d-flex flex-column">
+                            <h3 class="align-self-center">{{provider.name}}</h3>
+                            <p class="align-self-center">{{'Location: ' + provider.location}}</p>
+                            <p class="align-self-center">{{'Price: '+ provider.price}}</p>
+                        </div>
+                    </mat-grid-tile>
+                </div>            
+            </mat-grid-list>
+        </div>
+    </div>
+</div>

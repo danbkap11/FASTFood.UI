@@ -1,0 +1,66 @@
+<div class="d-flex flex-column w-100">
+    <h1 class="align-self-center mb-5">{{this.isShop?'Shops':'Warehouses'}}</h1> 
+    <div class="d-flex flex-column w-100" *ngIf="shops && shops.length > 0">
+        <div class="d-flex flex-column w-100 mb-4">
+            <h2 class="align-self-center mb-5">{{'You have '+ shops.length}}{{this.isShop?' shops':' warehouses'}}</h2>
+            <button type="button" class="btn btn-success w-20 align-self-center" (click)="createShop(createShopArea)">Add</button>    
+        </div>
+        <mat-grid-list  cols="2" rowHeight="4:1" gutterSize="2rem">
+            <div *ngFor="let shop of shops">
+                <mat-grid-tile class="shop-case" (click)="openShop(openShopArea, shop)">
+                    <div class="w-100 d-flex flex-column">
+                        <h3 class="align-self-center">{{shop.name}}</h3>
+                        <div class="d-flex flex-row align-self-center">
+                            <p class="mr-4">{{'Location: '+shop.location}}</p>
+                        </div>
+                    </div>
+                </mat-grid-tile>
+            </div>            
+        </mat-grid-list>
+    </div>
+    <div class="d-flex flex-column w-100" *ngIf="!shops || shops.length === 0">
+        <h2 class="align-self-center mb-5">You don't have + {{this.isShop?' shops':' warehouses'}}</h2>
+        <button type="button" class="btn btn-success w-20 align-self-center" (click)="createShop(createShopArea)">Create</button>
+    </div>
+</div>
+
+<ng-template #openShopArea let-modal>
+    <div class="modal-header">
+      <h3 class="modal-title m-0">{{this.isShop?' Shop':' Warehouse'}}{{selectedShop.name}}</h3>
+      <button type="button" id="closeOpenShopArea" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <app-shop
+        [shop]="selectedShop"></app-shop>
+    </div>
+</ng-template>
+
+<ng-template #createShopArea let-modal>
+    <div class="modal-header">
+      <h3 class="modal-title m-0">Create {{this.isShop?' shops':' warehouses'}}</h3>
+      <button type="button" class="close" id="closeCreateShopArea" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <app-vending-machine-create
+        [role]="'Shop'">
+        </app-vending-machine-create>
+    </div>
+</ng-template>
+
+<ng-template #createProvidesFood let-modal>
+    <div class="modal-header">
+      <h3 class="modal-title m-0">Create {{this.isShop?' shops':' warehouses'}}</h3>
+      <button type="button" class="close" id="closeCreateShopArea" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <app-vending-machine-create
+        [role]="'Shop'">
+        </app-vending-machine-create>
+    </div>
+</ng-template>

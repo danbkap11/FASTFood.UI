@@ -1,0 +1,29 @@
+<div class="d-flex flex-column w-100 mb-4">
+    <h2 class="align-self-center mb-3">Food</h2>
+    <mat-grid-list class="mb-3"  cols="6" rowHeight="1:1" gutterSize="2rem">
+        <div *ngFor="let food of foodList">
+            <mat-grid-tile  class="shop-case ERROR">
+                <div class="w-100 d-flex flex-column">
+                    <h3 class="align-self-center">{{food.name}}</h3>
+                    <p class="align-self-center">{{'Description: ' + food.description}}</p>
+                    <p class="align-self-center">{{'Temp: '+ food.temp}}</p>
+                </div>
+            </mat-grid-tile>
+        </div>            
+    </mat-grid-list>
+    <button type="button" class="btn btn-success w-30 align-self-center mb-3" (click)="createFood(createFoodArea)">Add</button>
+</div>
+
+
+<ng-template #createFoodArea let-modal>
+    <div class="modal-header">
+        <h3 class="align-self-center m-0">Create Food</h3> 
+      <button type="button" class="close" id="closecreateFoodArea" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <app-create-food>
+        </app-create-food>
+    </div>
+</ng-template>

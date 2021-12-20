@@ -1,0 +1,20 @@
+<div class="w-100 d-flex flex-column">
+    <h3 *ngIf="sortedProvidersOfFood && sortedProvidersOfFood.length > 0" class="align-self-center">You Provide:</h3>
+    <mat-grid-list class="mb-3"  *ngIf="sortedProvidersOfFood && sortedProvidersOfFood.length > 0" cols="3" rowHeight="0.8:1" gutterSize="2rem">
+        <div *ngFor="let provider of sortedProvidersOfFood">
+            <mat-grid-tile [ngClass]="['shop-case']">
+                <div class="w-100 d-flex flex-column">
+                    <h3 class="align-self-center mb-3">{{provider.food.name}}</h3>
+                    <p class="align-self-center mb-3">{{provider.food.description}}</p>
+                    <p class="align-self-center  mb-3">Price: {{provider.price}}</p>
+                    <button type="button" class="btn btn-danger w-60 align-self-center" (click)="removeFromProvide(provider)">Remove</button>
+                </div>
+            </mat-grid-tile>
+        </div>            
+    </mat-grid-list>
+    <div *ngIf="!sortedProvidersOfFood || sortedProvidersOfFood.length === 0" class="d-flex flex-row w-100">
+        <h3>You provide nothing</h3>
+    </div>
+    <button type="button" class="btn btn-success w-50 align-self-center" (click)="addToProvide()">Add product to provide</button>
+
+</div>

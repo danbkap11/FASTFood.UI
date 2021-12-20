@@ -1,0 +1,100 @@
+<div class="d-flex flex-column w-100">
+    <div class="d-flex flex-column align-self-center w-100">
+        <p class="mr-3">{{'Description: ' + storage.description}}</p>
+        <div class="d-flex flex-row align-self-center">
+            <p class="mr-3">{{'Capacity: ' + storage.capacity}}</p>
+            <p class="mr-3">{{'Temp: ' + storage.temp}}</p>
+        </div>
+        <button type="button" class="btn btn-success w-50 align-self-center mb-3" (click)="updateStorage(updateStorageArea)">Update Storage Info</button>
+        <button *ngIf="isShop&&(storage.orderList && storage.orderList.length > 0)" type="button" class="btn btn-success w-50 align-self-center mb-3" (click)="showOrders(showOrdersArea)">Show orders</button>
+        <button type="button" class="btn btn-success w-50 align-self-center mb-3" (click)="putFood(showPutFoodArea)">Put food to storage</button>
+        <p *ngIf="isShop&&(!storage.orderList || storage.orderList.length === 0)" class="align-self-center mb-3">No orders</p>  
+    </div>
+    <div class="d-flex flex-column w-100" *ngIf="storage?.foodInStorageModelList && storage?.foodInStorageModelList?.length > 0">
+        <div class="d-flex flex-column w-100 mb-4">
+            <p class="align-self-center mb-3">{{'Food takes '+ storage?.fullness}}</p>
+            <button *ngIf="isShop" type="button" class="btn btn-success w-50 align-self-center mb-3" (click)="orderFood(orderFoodArea)">Order food</button>
+        </div>
+        <mat-grid-list class="mb-3" cols="3" rowHeight="1:1" gutterSize="2rem">
+            <div *ngFor="let foodInStorageModelList of storage.foodInStorageModelList">
+                <mat-grid-tile [ngClass]="['shop-case', foodInStorageModelList.status]">
+                    <div class="w-100 d-flex flex-column">
+                        <h3 class="align-self-center mb-3">{{foodInStorageModelList.food.name}}</h3>
+                        <p>{{foodInStorageModelList.food.description}}</p>
+                        <p>Quantity: {{foodInStorageModelList.quantity}}</p>
+                        <p>Price: for 1 {{foodInStorageModelList.food.isPacked?' ':'kg '}}{{foodInStorageModelList.price}}</p>
+                        <p >{{'Shelf Life: ' + foodInStorageModelList.shelfLife}}</p>
+                        <p >{{'Status: ' + foodInStorageModelList.status}}</p>
+                    </div>
+                </mat-grid-tile>
+            </div>            
+        </mat-grid-list>
+        <button type="button" class="btn btn-danger w-50 align-self-center mb-3" (click)="clearStorage()">Clear storage</button>
+    </div>
+    <div class="d-flex flex-column w-100" *ngIf="!storage?.foodInStorageModelList || storage?.foodInStorageModelList!.length === 0">
+        <button *ngIf="isShop" type="button" class="btn btn-success w-50 align-self-center" (click)="orderFood(orderFoodArea)">Order food</button>
+        <h2 class="align-self-center mb-5">Storage is empty</h2>        
+    </div>
+</div>
+
+<ng-template #updateStorageArea let-modal>
+    <div class="modal-header">
+        <h3 class="align-self-center m-0">Create Storage</h3> 
+      <button type="button" class="close" id="closeUpdateStorageArea" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <app-storage-modify
+        [storeId]="shopId"
+        [storage]="storage">
+        </app-storage-modify>
+    </div>
+</ng-template>
+
+<ng-template #orderFoodArea let-modal>
+    <div class="modal-header">
+        <h3 class="align-self-center m-0">OrderFood</h3> 
+      <button type="button" class="close" id="closeOrderFoodArea" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <app-order-food
+        [temp]="storage.temp"
+        [storageId]="storage.id">
+        </app-order-food>
+    </div>
+</ng-template>
+
+<ng-template #showOrdersArea let-modal>
+    <div class="modal-header">
+        <h3 class="align-self-center m-0">Orders</h3> 
+      <button type="button" class="close" id="closeShowOrdersArea" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <app-orders
+        [orderList]="storage.orderList"
+        [storeRole]="storeRole"
+        [shopId]="shopId"
+        [storageId]="storage.id">  
+        </app-orders>
+    </div>
+</ng-template>
+
+<ng-template #showPutFoodArea let-modal>
+    <div class="modal-header">
+        <h3 class="align-self-center m-0">Put food to storage</h3> 
+      <button type="button" class="close" id="closeshowPutFoodArea" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <app-put-food
+        [temp]="storage.temp"
+        [storageId]="storage.id">  
+        </app-put-food>
+    </div>
+</ng-template>

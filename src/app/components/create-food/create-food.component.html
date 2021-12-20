@@ -1,0 +1,24 @@
+<div class="d-flex flex-column w-100">
+    <form class="d-flex flex-column w-100" [formGroup]="regForm">
+        <p>Name</p>
+        <input type="text" formControlName="name"  class="w-auto mb-3" placeholder="name">
+        <p>Description</p>
+        <input type="text" formControlName="description"  class="w-auto mb-3" placeholder="description">
+        <p>Occupied space</p>
+        <input type="number" formControlName="occupiedSpace"  class="w-auto mb-3" placeholder="occupiedSpace">
+    </form>
+    <mat-form-field appearance="fill">
+        <mat-label>Temp</mat-label>
+        <select matNativeControl [(ngModel)]="selectedTemp" name="temp">
+          <option value="1" selected></option>
+          <option *ngFor="let temp of temps" [value]="temp.id">
+            {{temp.viewValue}}
+          </option>
+        </select>
+    </mat-form-field>
+    <mat-slide-toggle
+    [checked]="checked">
+    Is packed
+    </mat-slide-toggle>
+    <button type="button" class="btn btn-success w-50 align-self-center" (click)="createFood()">Create Storage</button>
+</div>

@@ -1,0 +1,75 @@
+<div class="d-flex flex-column w-100">
+    <div class="d-flex flex-row align-self-center justify-content-center w-100">
+        <p class="mr-3">{{'Location: ' + vendingMachine.location}}</p>
+        <button type="button" class="btn btn-success w-30 align-self-center mb-3" (click)="updateVendingMachine(updateVendingMachineArea)">Update Vending-Machine Info</button> 
+    </div>
+    <div class="d-flex flex-column w-100" *ngIf="vendingMachine?.cellList && vendingMachine?.cellList?.length > 0">
+        <div class="d-flex flex-column w-100 mb-4">
+            <h2 class="align-self-center mb-5">{{'In machine '+ vendingMachine?.cellList!.length +' cells'}}</h2>
+            <button type="button" class="btn btn-success w-20 align-self-center mb-3" (click)="createCell()">Add</button>
+        </div>
+        <mat-grid-list  cols="3" rowHeight="1.2:1" gutterSize="2rem">
+            <div *ngFor="let cell of vendingMachine.cellList">
+                <mat-grid-tile [ngClass]="['shop-case', cell.status]" (click)="updateCell(cellArea, cell)">
+                    <div class="w-100 d-flex flex-column">
+                        <h3 class="align-self-center mb-3">{{'Cell ' + cell.number}}</h3>
+                        <h4 class="align-self-center">{{'Status: ' + cell.status}}</h4>
+                        <div *ngIf="cell.status !== 'EMPTY'" class="d-flex flex-column align-self-center">
+                            <p class="mr-3">{{'Food: '+ cell.foodName}}</p>
+                            <p class="mr-3">{{cell.foodDescription}}</p>
+                            <div class="d-flex flex-row">
+                                <div class="d-flex flex-column mr-3">
+                                    <p class="mb-3">{{cell.shelfLife?'Shelf Life: '+ cell.shelfLife:''}}</p>
+                                    <p>{{'Temp: '+ cell.temp}}</p>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <p >{{'Price: '+ cell.price}}</p>
+                                    <p>{{!cell.isPacked ? 'Weight: '+ cell.weight : ''}}</p>                                    
+                                </div>
+                            </div>
+                            <p class="mr-3">{{'Provider: '+ cell.providerName}}</p>
+                            <p *ngIf="cell.providerUserId !== sharedService.user.id" class="mr-3">{{cell.isPacked ? 'Provider price for 1: ' + cell.providerPrice : 'Provider price for 1kg: ' + cell.providerPrice}}</p>
+                        </div>
+                        <div *ngIf="cell.status === 'EMPTY'" class="d-flex flex-column align-self-center">
+                            <p class="mr-3">{{'Number: '+ cell.number}}</p>
+                        </div>
+                    </div>
+                </mat-grid-tile>
+            </div>            
+        </mat-grid-list>
+
+    </div>
+    <div class="d-flex flex-column w-100" *ngIf="!vendingMachine?.cellList || vendingMachine?.cellList!.length === 0">
+        <h2 class="align-self-center mb-5">Vending Machine don't have cells</h2>
+        <button type="button" class="btn btn-success w-20 align-self-center" (click)="createCell()">Create</button>
+    </div>
+</div>
+
+<ng-template #cellArea let-modal>
+    <div class="modal-header">
+        <h3 class="align-self-center m-0">{{'Cell ' + selectedCell.number}}</h3> 
+      <button type="button" class="close" id="closeCellArea" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <app-cell
+        [cellModel]="selectedCell">            
+        </app-cell>
+    </div>
+</ng-template>
+
+<ng-template #updateVendingMachineArea let-modal>
+    <div class="modal-header">
+      <h3 class="modal-title m-0">Update Vending-Machine</h3>
+      <button type="button" class="close" id="closeUpdateVendingMachineArea" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <app-vending-machine-create
+        [shop]="vendingMachine"
+        [role]="'Vending Machine'">
+        </app-vending-machine-create>
+    </div>
+</ng-template>

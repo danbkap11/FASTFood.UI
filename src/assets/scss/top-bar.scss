@@ -1,0 +1,18 @@
+app-top-bar{
+    ul{
+        background-color: darkseagreen;
+    }
+    a{
+        color: darkblue;
+    }
+    .nav-tabs {
+        .nav-link{
+            background-color: blanchedalmond;
+        }
+
+        .nav-link.active,
+        .nav-item.show .nav-link {
+          background-color: white;
+        }
+    }
+}

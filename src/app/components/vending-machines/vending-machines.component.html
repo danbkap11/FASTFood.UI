@@ -1,0 +1,54 @@
+<div class="d-flex flex-column w-100">
+    <h1 class="align-self-center mb-5">Vending Machines</h1> 
+    <div class="d-flex flex-column w-100" *ngIf="vendingMachines && vendingMachines.length > 0">
+        <div class="d-flex flex-column w-100 mb-4">
+            <h2 class="align-self-center mb-5">{{'You have '+ vendingMachines.length +' vending machines'}}</h2>
+            <button type="button" class="btn btn-success w-20 align-self-center" (click)="createVendingMachine(createVendingMachineArea)">Add</button>    
+        </div>
+        <mat-grid-list  cols="2" rowHeight="4:1" gutterSize="2rem">
+            <div *ngFor="let vendingMachine of vendingMachines">
+                <mat-grid-tile class="shop-case" (click)="openVendingMachine(content, vendingMachine)">
+                    <div class="w-100 d-flex flex-column">
+                        <h3 class="align-self-center">{{vendingMachine.name}}</h3>
+                        <div class="d-flex flex-row align-self-center">
+                            <p class="mr-4">{{'Location: '+vendingMachine.location}}</p>
+                            <p>{{'Total cells: '+vendingMachine.cellList.length}}</p>
+                        </div>
+                    </div>
+                </mat-grid-tile>
+            </div>            
+        </mat-grid-list>
+    </div>
+    <div class="d-flex flex-column w-100" *ngIf="!vendingMachines || vendingMachines.length === 0">
+        <h2 class="align-self-center mb-5">You don't have vending machines</h2>
+        <button type="button" class="btn btn-success w-20 align-self-center" (click)="createVendingMachine(createVendingMachineArea)">Create</button>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h3 class="modal-title m-0">{{'Vending Machine ' + selectedVendingMachine.name}}</h3>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <app-vending-machine
+        [vendingMachine]="selectedVendingMachine">
+        </app-vending-machine>
+    </div>
+</ng-template>
+
+<ng-template #createVendingMachineArea let-modal>
+    <div class="modal-header">
+      <h3 class="modal-title m-0">Create Vending-Machine</h3>
+      <button type="button" class="close" id="closeCreateVendingMachineArea" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <app-vending-machine-create
+        [role]="'Vending Machine'">
+        </app-vending-machine-create>
+    </div>
+</ng-template>

@@ -1,0 +1,18 @@
+<div class="d-flex flex-column w-100">
+    <h1>Registration</h1> 
+    <form class="d-flex flex-column w-100" [formGroup]="regForm" (submit)="tryRegiter()">
+        <p>Login</p>
+        <input type="text" formControlName="login"  class="w-auto mb-3" placeholder="Login">
+        <p>Name</p>
+        <input type="text" formControlName="name"  class="w-auto mb-3" placeholder="Name">
+        <p>Password</p>
+        <input type="password" formControlName="password" class="w-auto mb-3" placeholder="Password">
+        <p>Confirm Password</p>
+        <input type="password" formControlName="confirmPassword" class="w-auto mb-3" placeholder="Confirm Password">
+        <p>Email</p>
+        <input type="email" formControlName="email" class="w-auto mb-3" placeholder="email">
+        <p>Phone</p>
+        <input type="text" formControlName="phone"  class="w-auto mb-3" placeholder="1111111111">
+        <button type="button" class="btn btn-success w-50 align-self-center" (click)="tryRegiter()">Success</button>
+    </form>
+</div>
